@@ -406,6 +406,7 @@ body {
     .header-container {
         flex-direction: column;
         gap: 5px;
+        algin-items: center;
     }
 
     /* 2. Logo Ajustado (Grande) */
@@ -415,12 +416,22 @@ body {
         width: 100%;
         display: flex;
         justify-content: center;
+        margin-bottom: 5px;
+        text-align: center;
+    }
+   /* Regla especial para que el enlace no estorbe */
+    .logo-wrapper a {
+        display: block;
+        width: 100%;
+        text-align: center;
     }
 
     .hero-logo {
-        height: auto;      /* Mantenemos tu tamaño grande preferido */
-        width: 70%;
-        max-width: none;     /* Evita que se salga en pantallas muy finas */
+        display: block;       /* Se comporta como bloque sólido */
+        margin: 0 auto;       /* <--- LA CLAVE: Márgenes automáticos a los lados */
+        height: auto;
+        width: 80%;           /* Tamaño grande pero controlado */
+        max-width: 280px;
         object-fit: contain;
     }
 
@@ -463,5 +474,6 @@ body {
         scroll-margin-top: 20px; /* En móvil no es sticky, así que bajamos el margen */
     }
 }
+
 
 
