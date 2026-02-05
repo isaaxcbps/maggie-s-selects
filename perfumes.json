@@ -1,0 +1,111 @@
+[
+    {
+        "id": 1,
+        "categoria": "perfumes",
+        "nombre": "Dior Sauvage - 100ml",
+        "marca": "Dior",
+        "precio": 130.00,
+        "stock": 10,
+        "imagen": "img/perfumes/1p.jpeg"
+    },
+    {
+        "id": 2,
+        "categoria": "perfumes",
+        "nombre": "Chanel Chance - 100ml",
+        "marca": "Chanel",
+        "precio": 150.00,
+        "stock": 7,
+        "imagen": "img/perfumes/2p.jpeg"
+    },
+    {
+        "id": 3,
+        "categoria": "perfumes",
+        "nombre": "Chanel Coco Mademoiselle - 100ml",
+        "marca": "Chanel",
+        "precio": 160.00,
+        "stock": 5,
+        "imagen": "img/perfumes/3p.jpeg"
+    },
+    {
+        "id": 4,
+        "categoria": "perfumes",
+        "nombre": "Dior J'adore - 100ml",
+        "marca": "Dior",
+        "precio": 140.00,
+        "stock": 8,
+        "imagen": "img/perfumes/4p.jpeg"
+    },
+    {
+        "id": 5,
+        "categoria": "perfumes",
+        "nombre": "Lancôme La Vie Est Belle - 100ml",
+        "marca": "Lancôme",
+        "precio": 135.00,
+        "stock": 12,
+        "imagen": "img/perfumes/5p.jpeg"
+    },
+    {
+        "id": 6,
+        "categoria": "perfumes",
+        "nombre": "Carolina Herrera Good Girl - 80ml",
+        "marca": "Carolina Herrera",
+        "precio": 125.00,
+        "stock": 15,
+        "imagen": "img/perfumes/6p.jpeg"
+    },
+    {
+        "id": 7,
+        "categoria": "perfumes",
+        "nombre": "Yves Saint Laurent Libre - 90ml",
+        "marca": "Yves Saint Laurent",
+        "precio": 145.00,
+        "stock": 9,
+        "imagen": "img/perfumes/7p.jpeg"
+    },
+    {
+        "id": 8,
+        "categoria": "perfumes",
+        "nombre": "Chanel Bleu de Chanel - 100ml",
+        "marca": "Chanel",
+        "precio": 155.00,
+        "stock": 6,
+        "imagen": "img/perfumes/8p.jpeg"
+    },
+    {
+        "id": 9,
+        "categoria": "perfumes",
+        "nombre": "Paco Rabanne 1 Million - 100ml",
+        "marca": "Paco Rabanne",
+        "precio": 110.00,
+        "stock": 20,
+        "imagen": "img/perfumes/9p.jpeg"
+    },
+    {
+        "id": 10,
+        "categoria": "perfumes",
+        "nombre": "Creed Aventus - 100ml",
+        "marca": "Creed",
+        "precio": 350.00,
+        "stock": 3,
+        "imagen": "img/perfumes/10p.jpeg"
+    },
+    {
+        "id": 11,
+        "categoria": "perfumes",
+        "nombre": "Tom Ford Oud Wood - 50ml",
+        "marca": "Tom Ford",
+        "precio": 250.00,
+        "stock": 4,
+        "imagen": "img/perfumes/11p.jpeg"
+    },
+    {
+        "id": 12,
+        "categoria": "perfumes",
+        "nombre": "Versace Eros - 100ml",
+        "marca": "Versace",
+        "precio": 95.00,
+        "stock": 18,
+        "imagen": "img/perfumes/12p.jpeg"
+    }
+    
+]
