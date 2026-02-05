@@ -1,5 +1,5 @@
 /* =========================================
-   1. RESET Y BASES (Limpieza de espacios)
+   1. RESET Y BASES
    ========================================= */
 * {
     margin: 0;
@@ -19,11 +19,11 @@ body {
 }
 
 /* =========================================
-   2. CABECERA (Header Fino + Logo Flotante)
+   2. CABECERA (Header)
    ========================================= */
 .main-header {
     background: #fff;
-    height: 90px; /* Barra delgada para no robar espacio */
+    height: 90px;
     display: flex;
     align-items: center;
     position: sticky;
@@ -41,15 +41,15 @@ body {
     position: relative;
 }
 
-/* El truco del Logo para que se vea claro y grande */
+/* Logo Flotante */
 .logo-wrapper {
     position: absolute;
-    top: -70px; /* Sube para no ensanchar la barra blanca */
+    top: -70px;
     left: 0;
 }
 
 .hero-logo {
-    height: 250px; /* Tamaño imponente */
+    height: 250px;
     width: auto;
     filter: drop-shadow(0px 4px 5px rgba(0,0,0,0.1));
     transition: transform 0.3s ease;
@@ -59,7 +59,7 @@ body {
     transform: scale(1.05);
 }
 
-/* Navegación a la derecha */
+/* Navegación */
 .main-nav {
     display: flex;
     align-items: center;
@@ -78,32 +78,14 @@ body {
 }
 
 .nav-links a:hover {
-    color: #D4AF37; /* Dorado Maggie's */
-}
-
-.cart-icon {
-    margin-left: 40px;
-    position: relative;
-    cursor: pointer;
-    font-size: 1.3rem;
-}
-
-#cart-count {
-    background: #D4AF37;
-    color: #fff;
-    font-size: 11px;
-    padding: 2px 7px;
-    border-radius: 50%;
-    position: absolute;
-    top: -12px;
-    right: -12px;
+    color: #D4AF37;
 }
 
 /* =========================================
-   3. CUERPO (Banner y Catálogo)
+   3. CUERPO Y BANNER
    ========================================= */
 .shop-container {
-    padding-top: 40px; /* Ajuste para que el contenido empiece cerca del header */
+    padding-top: 40px;
 }
 
 .banner {
@@ -144,7 +126,48 @@ body {
 }
 
 /* =========================================
-   4. PIE DE PÁGINA (Footer Minimalista)
+   4. TARJETAS DE PRODUCTOS (Corrección de Imágenes)
+   ========================================= */
+.product-card {
+    background: #fff;
+    border: 1px solid #eee;
+    padding: 20px;
+    text-align: center;
+    transition: 0.4s;
+    border-radius: 8px; /* Borde suave */
+}
+
+.product-card:hover {
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    transform: translateY(-5px);
+}
+
+/* EL CONTENEDOR DE LA IMAGEN (AQUÍ ESTABA EL ERROR) */
+.product-img-container {
+    width: 100%;
+    height: 250px; /* AUMENTADO: Antes tenías 100px, 250px es ideal */
+    margin-bottom: 20px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+}
+
+/* LA IMAGEN DENTRO DEL CONTENEDOR */
+.product-img-container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* Esto evita que se recorten */
+    transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-img-container img {
+    transform: scale(1.08);
+}
+
+/* =========================================
+   5. PIE DE PÁGINA (Footer)
    ========================================= */
 .main-footer {
     background: #000;
@@ -170,7 +193,6 @@ body {
     color: #D4AF37;
 }
 
-/* Métodos de Pago Elegantes */
 .payment-methods {
     display: flex;
     gap: 25px;
@@ -189,76 +211,10 @@ body {
 }
 
 /* =========================================
-   5. RESPONSIVE (Ajuste para móviles)
+   6. EXTRAS (Carrusel, Contacto, Splash)
    ========================================= */
-@media (max-width: 768px) {
-    .logo-wrapper {
-        top: -20px;
-    }
-    .hero-logo {
-        height: 100px;
-    }
-    .nav-links {
-        display: none; /* Podrías agregar un menú hamburguesa luego */
-    }
-    .banner h1 {
-        font-size: 2rem;
-    }
-}
-/* ESTILOS DE CONTACTO */
-.contact-container {
-    padding: 100px 5% 50px;
-    text-align: center;
-    max-width: 900px;
-    margin: 0 auto;
-}
 
-.contact-info h1 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-    color: #1a1a1a;
-}
-
-.contact-methods {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-    margin-top: 50px;
-}
-
-.method-card {
-    padding: 40px;
-    background: #fff;
-    border: 1px solid #eee;
-    transition: 0.3s;
-}
-
-.method-card:hover {
-    border-color: #D4AF37;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-}
-
-.method-card i {
-    font-size: 2.5rem;
-    color: #D4AF37;
-    margin-bottom: 20px;
-}
-
-.btn-contact {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 10px 30px;
-    background: #000;
-    color: #fff;
-    text-decoration: none;
-    font-weight: 600;
-    transition: 0.3s;
-}
-
-.btn-contact:hover {
-    background: #D4AF37;
-}
-/* CARRUSEL DE MARCAS */
+/* Carrusel de Marcas */
 .brands-carousel {
     width: 100%;
     overflow: hidden;
@@ -269,7 +225,7 @@ body {
 
 .brands-track {
     display: flex;
-    width: calc(250px * 12); /* Ajusta según el número de marcas */
+    width: calc(250px * 12);
     animation: scroll-infinito 30s linear infinite;
 }
 
@@ -281,24 +237,24 @@ body {
 }
 
 .brand-slide img {
-    height: 50px; /* Tamaño discreto y elegante */
+    height: 50px;
     width: auto;
-    filter: grayscale(100%); /* Efecto lujo minimalista */
+    filter: grayscale(100%);
     opacity: 0.5;
     transition: 0.4s;
 }
 
 .brand-slide img:hover {
-    
+    filter: grayscale(0%);
     opacity: 1;
 }
 
-/* ANIMACIÓN INFINITA */
 @keyframes scroll-infinito {
     0% { transform: translateX(0); }
     100% { transform: translateX(calc(-250px * 6)); }
 }
-/* PANTALLA DE CARGA */
+
+/* Splash Screen (Pantalla de Carga) */
 #splash-screen {
     position: fixed;
     top: 0;
@@ -309,7 +265,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 9999; /* Por encima de todo */
+    z-index: 9999;
     transition: opacity 0.8s ease, visibility 0.8s;
 }
 
@@ -323,7 +279,6 @@ body {
     animation: pulse-luxury 2s infinite ease-in-out;
 }
 
-/* Loader Minimalista Dorado */
 .luxury-loader {
     width: 50px;
     height: 2px;
@@ -339,7 +294,6 @@ body {
     color: #999;
 }
 
-/* Animaciones */
 @keyframes pulse-luxury {
     0% { transform: scale(1); opacity: 0.8; }
     50% { transform: scale(1.05); opacity: 1; }
@@ -351,15 +305,7 @@ body {
     100% { width: 100px; }
 }
 
-/* Clase para ocultar el splash */
-.hidden-splash {
-    opacity: 0 !important;
-    visibility: hidden !important;
-    pointer-events: none !important; /* Para que no bloquee los clics después de ocultarse */
-    transition: 0.8s ease;
-
-}
-/* Corrección de cierre para GitHub Pages */
+/* Clase para ocultar el splash (VERSIÓN FINAL) */
 .hidden-splash {
     opacity: 0 !important;
     visibility: hidden !important;
@@ -367,44 +313,18 @@ body {
     transition: opacity 0.8s ease, visibility 0.8s !important;
 }
 
-/* Mejora para las tarjetas de productos en el grid */
-.product-card {
-    background: #fff;
-    border: 1px solid #eee;
-    padding: 20px;
-    text-align: center;
-    transition: 0.4s;
+/* Responsive */
+@media (max-width: 768px) {
+    .logo-wrapper {
+        top: -20px;
+    }
+    .hero-logo {
+        height: 100px;
+    }
+    .nav-links {
+        display: none;
+    }
+    .banner h1 {
+        font-size: 2rem;
+    }
 }
-
-.product-card:hover {
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-    transform: translateY(-5px);
-}
-
-/* 1. El contenedor "marco" de la imagen */
-.product-img-container {
-    width: 100%;
-    height: 100px; /* Altura estándar para todas las tarjetas */
-    margin-bottom: 20px;
-    overflow: hidden; /* Por si alguna imagen se pasa un píxel */
-    display: flex;
-    justify-content: center; /* Centrado horizontal */
-    align-items: center; /* Centrado vertical */
-    background-color: #fff; /* Fondo blanco limpio */
-}
-
-/* 2. La imagen dentro del marco */
-.product-img-container img {
-    max-width: 100%;  /* No puede ser más ancha que el marco */
-    max-height: 100%; /* No puede ser más alta que el marco */
-    object-fit: contain; /* CLAVE: Muestra la imagen completa sin recortar */
-    transition: transform 0.3s ease; /* Prepara una animación suave */
-}
-
-/* 3. Pequeño efecto de lujo al pasar el mouse */
-.product-card:hover .product-img-container img {
-    transform: scale(1.08); /* Un zoom muy sutil y elegante */
-}
-
-
-
