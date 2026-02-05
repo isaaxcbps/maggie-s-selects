@@ -133,3 +133,16 @@ function procesarCompra(id, nombre, precio, marca) {
         alert("Este producto se ha agotado. Consulta con nosotros por nuevas existencias.");
     }
 }
+
+/* =========================================
+   FUNCIONALIDAD DE MÉTODOS DE PAGO
+
+   ========================================= */
+function infoPago(metodo) {
+    // Usamos un 'alert' sencillo, pero con texto profesional
+    alert(
+        `💳 Pago con ${metodo}:\n\n` +
+        `Para tu seguridad, procesamos los pagos con ${metodo} mediante enlace de pago seguro (PayPhone / Deuna) o transferencia bancaria directa.\n\n` +
+        `¡Contáctanos por WhatsApp para enviarte el link!`
+    );
+}
