@@ -146,3 +146,25 @@ function infoPago(metodo) {
         `¡Contáctanos por WhatsApp para enviarte el link!`
     );
 }
+/* =========================================
+   AUTO-SCROLL AL FILTRAR (Pega esto al final de tienda.js)
+   ========================================= */
+document.querySelectorAll('.nav-links a').forEach(enlace => {
+    enlace.addEventListener('click', function(e) {
+        // Verificamos si es un enlace de filtro (tiene #)
+        const href = this.getAttribute('href');
+        
+        if (href.includes('#') && href !== 'index.html') {
+            // Le damos un respiro de 100ms para que el filtro termine de procesar
+            setTimeout(() => {
+                const galeria = document.getElementById('contenedor-productos');
+                if (galeria) {
+                    galeria.scrollIntoView({ 
+                        behavior: 'smooth', // Bajada suave estilo cine
+                        block: 'start'      // Alinea al principio
+                    });
+                }
+            }, 100);
+        }
+    });
+});
