@@ -413,6 +413,8 @@ body {
 
     .hero-logo {
         height: 200px;
+        max-width: 90%;     /* Evita que se salga de la pantalla en celulares muy angostos */
+        object-fit: contain;
     }
 
     /* 3. Menú Visible y Ordenado */
@@ -447,4 +449,5 @@ body {
         padding-top: 10px;
     }
 }
+
 
