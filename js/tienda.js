@@ -147,21 +147,26 @@ function infoPago(metodo) {
     );
 }
 /* =========================================
-   AUTO-SCROLL AL FILTRAR (Pega esto al final de tienda.js)
+   AUTO-SCROLL SUAVE AL FILTRAR
+   (Pega esto al final de tu archivo tienda.js)
    ========================================= */
 document.querySelectorAll('.nav-links a').forEach(enlace => {
     enlace.addEventListener('click', function(e) {
-        // Verificamos si es un enlace de filtro (tiene #)
-        const href = this.getAttribute('href');
         
-        if (href.includes('#') && href !== 'index.html') {
-            // Le damos un respiro de 100ms para que el filtro termine de procesar
+        // Obtenemos hacia dónde apunta el link (ej: #carteras)
+        const destino = this.getAttribute('href');
+
+        // Solo actuamos si es un enlace interno con # (y no es solo "index.html")
+        if (destino.includes('#') && destino !== 'index.html') {
+            
+            // Esperamos 100ms a que el filtro de productos termine de trabajar
             setTimeout(() => {
-                const galeria = document.getElementById('contenedor-productos');
-                if (galeria) {
-                    galeria.scrollIntoView({ 
-                        behavior: 'smooth', // Bajada suave estilo cine
-                        block: 'start'      // Alinea al principio
+                const seccionProductos = document.getElementById('contenedor-productos');
+                
+                if (seccionProductos) {
+                    seccionProductos.scrollIntoView({ 
+                        behavior: 'smooth', // Animación de bajada suave (tipo cine)
+                        block: 'start'      // Alinea al principio del contenedor
                     });
                 }
             }, 100);
