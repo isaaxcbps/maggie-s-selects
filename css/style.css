@@ -381,3 +381,29 @@ body {
     transform: translateY(-5px);
 }
 
+/* 1. El contenedor "marco" de la imagen */
+.product-img-container {
+    width: 100%;
+    height: 250px; /* Altura estándar para todas las tarjetas */
+    margin-bottom: 20px;
+    overflow: hidden; /* Por si alguna imagen se pasa un píxel */
+    display: flex;
+    justify-content: center; /* Centrado horizontal */
+    align-items: center; /* Centrado vertical */
+    background-color: #fff; /* Fondo blanco limpio */
+}
+
+/* 2. La imagen dentro del marco */
+.product-img-container img {
+    max-width: 100%;  /* No puede ser más ancha que el marco */
+    max-height: 100%; /* No puede ser más alta que el marco */
+    object-fit: contain; /* CLAVE: Muestra la imagen completa sin recortar */
+    transition: transform 0.3s ease; /* Prepara una animación suave */
+}
+
+/* 3. Pequeño efecto de lujo al pasar el mouse */
+.product-card:hover .product-img-container img {
+    transform: scale(1.08); /* Un zoom muy sutil y elegante */
+}
+
+
