@@ -126,7 +126,7 @@ body {
 }
 
 /* =========================================
-   4. TARJETAS DE PRODUCTOS (Corrección de Imágenes)
+   4. TARJETAS DE PRODUCTOS (Estilo Tienda)
    ========================================= */
 .product-card {
     background: #fff;
@@ -134,7 +134,7 @@ body {
     padding: 20px;
     text-align: center;
     transition: 0.4s;
-    border-radius: 8px; /* Borde suave */
+    border-radius: 8px;
 }
 
 .product-card:hover {
@@ -142,10 +142,10 @@ body {
     transform: translateY(-5px);
 }
 
-/* EL CONTENEDOR DE LA IMAGEN (AQUÍ ESTABA EL ERROR) */
+/* CORRECCIÓN DE IMÁGENES (250px y ajuste perfecto) */
 .product-img-container {
     width: 100%;
-    height: 250px; /* AUMENTADO: Antes tenías 100px, 250px es ideal */
+    height: 250px; /* Altura ideal */
     margin-bottom: 20px;
     overflow: hidden;
     display: flex;
@@ -154,11 +154,10 @@ body {
     background-color: #fff;
 }
 
-/* LA IMAGEN DENTRO DEL CONTENEDOR */
 .product-img-container img {
     max-width: 100%;
     max-height: 100%;
-    object-fit: contain; /* Esto evita que se recorten */
+    object-fit: contain; /* Evita recortes */
     transition: transform 0.3s ease;
 }
 
@@ -179,7 +178,7 @@ body {
 .footer-content {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Esto asegura que TODO se centre verticalmente */
+    align-items: center; /* Centrado vertical general */
     gap: 20px;
     text-align: center;
 }
@@ -194,40 +193,40 @@ body {
     color: #D4AF37;
 }
 
-/* CORRECCIÓN DE ALINEACIÓN DE ÍCONOS */
+/* ALINEACIÓN DE MÉTODOS DE PAGO */
 .payment-methods {
-    display: flex;             /* Activa Flexbox */
-    justify-content: center;   /* Centra los íconos horizontalmente */
-    align-items: center;       /* Alinea los íconos a la misma altura vertical */
-    gap: 30px;                 /* Espacio uniforme entre ellos */
-    font-size: 2rem;           /* Tamaño un poco más grande y legible */
+    display: flex;
+    justify-content: center; /* Centra los íconos horizontalmente */
+    align-items: center;     /* Alinea verticalmente al centro */
+    gap: 30px;
+    font-size: 2rem;
     margin-top: 15px;
-    width: 100%;               /* Ocupa todo el ancho para poder centrar */
+    width: 100%;
 }
 
 .payment-methods i {
     color: #fff;
     transition: 0.3s;
     cursor: pointer;
-    vertical-align: middle; /* Asegura que no se suban ni bajen */
+    vertical-align: middle;
 }
 
 .payment-methods i:hover {
     color: #D4AF37;
-    transform: translateY(-3px); /* Pequeño salto al pasar el mouse */
+    transform: translateY(-3px);
 }
 
-/* Regla especial para que el enlace de WhatsApp no rompa la fila */
+/* CORRECCIÓN ENLACE WHATSAPP (Para que no se descuadre) */
 .wa-footer-link {
-    display: flex;             /* Convierte el enlace en caja flexible */
-    align-items: center;       /* Centra el ícono dentro del enlace */
-    text-decoration: none;     /* Quita subrayados */
-    color: inherit;            /* Hereda el color blanco */
-    height: 100%;              /* Se ajusta a la altura de los otros */
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    height: 100%;
 }
 
 /* =========================================
-   6. EXTRAS (Carrusel, Contacto, Splash)
+   6. EXTRAS (Carrusel, Splash y Animaciones)
    ========================================= */
 
 /* Carrusel de Marcas */
@@ -321,7 +320,7 @@ body {
     100% { width: 100px; }
 }
 
-/* Clase para ocultar el splash (VERSIÓN FINAL) */
+/* Clase para ocultar el splash */
 .hidden-splash {
     opacity: 0 !important;
     visibility: hidden !important;
@@ -344,4 +343,3 @@ body {
         font-size: 2rem;
     }
 }
-
