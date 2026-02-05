@@ -412,7 +412,7 @@ body {
     }
 
     .hero-logo {
-        height: 80px;
+        height: 200px;
     }
 
     /* 3. Menú Visible y Ordenado */
@@ -447,3 +447,4 @@ body {
         padding-top: 10px;
     }
 }
+
