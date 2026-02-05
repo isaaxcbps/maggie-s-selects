@@ -44,7 +44,7 @@ body {
 /* Logo Flotante */
 .logo-wrapper {
     position: absolute;
-    top: -60px;
+    top: -70px;
     left: 0;
 }
 
@@ -166,7 +166,7 @@ body {
 }
 
 /* =========================================
-   5. ESTILOS DE CONTACTO (¡AGREGADOS!)
+   5. ESTILOS DE CONTACTO
    ========================================= */
 .contact-container {
     padding: 100px 5% 50px;
@@ -224,7 +224,7 @@ body {
 }
 
 /* =========================================
-   6. PIE DE PÁGINA (Footer Corregido)
+   6. PIE DE PÁGINA (Footer)
    ========================================= */
 .main-footer {
     background: #000;
@@ -284,7 +284,7 @@ body {
 }
 
 /* =========================================
-   7. EXTRAS (Carrusel, Splash y Animaciones)
+   7. EXTRAS (Carrusel, Splash)
    ========================================= */
 
 /* Carrusel de Marcas */
@@ -386,19 +386,64 @@ body {
     transition: opacity 0.8s ease, visibility 0.8s !important;
 }
 
-/* Responsive */
+/* =========================================
+   8. RESPONSIVE (Móvil Adaptable)
+   (Versión Corregida: Menú visible)
+   ========================================= */
 @media (max-width: 768px) {
+    
+    /* 1. Cabecera Flexible */
+    .main-header {
+        height: auto;
+        padding: 15px 0;
+        position: relative;
+    }
+
+    .header-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    /* 2. Logo Ajustado */
     .logo-wrapper {
-        top: -20px;
+        position: static;
+        top: 0;
+        margin-bottom: 5px;
     }
+
     .hero-logo {
-        height: 100px;
+        height: 80px;
     }
+
+    /* 3. Menú Visible y Ordenado */
+    .main-nav {
+        width: 100%;
+        margin-left: 0;
+    }
+
     .nav-links {
-        display: none;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+        width: 100%;
+        background: #f8f8f8;
+        padding: 10px;
+        border-radius: 15px;
     }
+
+    .nav-links a {
+        margin-left: 0;
+        font-size: 0.85rem;
+        color: #333;
+    }
+
+    /* 4. Ajustes Generales */
     .banner h1 {
-        font-size: 2rem;
+        font-size: 1.8rem;
+    }
+    
+    .shop-container {
+        padding-top: 10px;
     }
 }
-
