@@ -44,7 +44,7 @@ body {
 /* Logo Flotante */
 .logo-wrapper {
     position: absolute;
-    top: -70px;
+    top: -60px;
     left: 0;
 }
 
@@ -401,3 +401,4 @@ body {
         font-size: 2rem;
     }
 }
+
