@@ -167,7 +167,7 @@ body {
 }
 
 /* =========================================
-   5. PIE DE PÁGINA (Footer)
+   5. PIE DE PÁGINA (Footer Corregido)
    ========================================= */
 .main-footer {
     background: #000;
@@ -179,8 +179,9 @@ body {
 .footer-content {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center; /* Esto asegura que TODO se centre verticalmente */
     gap: 20px;
+    text-align: center;
 }
 
 .footer-content p {
@@ -193,21 +194,36 @@ body {
     color: #D4AF37;
 }
 
+/* CORRECCIÓN DE ALINEACIÓN DE ÍCONOS */
 .payment-methods {
-    display: flex;
-    gap: 25px;
-    font-size: 1.8rem;
-    margin-top: 10px;
+    display: flex;             /* Activa Flexbox */
+    justify-content: center;   /* Centra los íconos horizontalmente */
+    align-items: center;       /* Alinea los íconos a la misma altura vertical */
+    gap: 30px;                 /* Espacio uniforme entre ellos */
+    font-size: 2rem;           /* Tamaño un poco más grande y legible */
+    margin-top: 15px;
+    width: 100%;               /* Ocupa todo el ancho para poder centrar */
 }
 
 .payment-methods i {
     color: #fff;
     transition: 0.3s;
     cursor: pointer;
+    vertical-align: middle; /* Asegura que no se suban ni bajen */
 }
 
 .payment-methods i:hover {
     color: #D4AF37;
+    transform: translateY(-3px); /* Pequeño salto al pasar el mouse */
+}
+
+/* Regla especial para que el enlace de WhatsApp no rompa la fila */
+.wa-footer-link {
+    display: flex;             /* Convierte el enlace en caja flexible */
+    align-items: center;       /* Centra el ícono dentro del enlace */
+    text-decoration: none;     /* Quita subrayados */
+    color: inherit;            /* Hereda el color blanco */
+    height: 100%;              /* Se ajusta a la altura de los otros */
 }
 
 /* =========================================
@@ -328,3 +344,4 @@ body {
         font-size: 2rem;
     }
 }
+
