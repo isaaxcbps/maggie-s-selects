@@ -147,29 +147,24 @@ function infoPago(metodo) {
     );
 }
 /* =========================================
-   AUTO-SCROLL SUAVE AL FILTRAR
-   (Pega esto al final de tu archivo tienda.js)
+   AUTO-SCROLL MEJORADO (Versión Móvil)
    ========================================= */
 document.querySelectorAll('.nav-links a').forEach(enlace => {
     enlace.addEventListener('click', function(e) {
-        
-        // Obtenemos hacia dónde apunta el link (ej: #carteras)
         const destino = this.getAttribute('href');
 
-        // Solo actuamos si es un enlace interno con # (y no es solo "index.html")
         if (destino.includes('#') && destino !== 'index.html') {
             
-            // Esperamos 100ms a que el filtro de productos termine de trabajar
+            // AUMENTAMOS A 300ms (Para dar tiempo a los celulares lentos)
             setTimeout(() => {
                 const seccionProductos = document.getElementById('contenedor-productos');
-                
                 if (seccionProductos) {
                     seccionProductos.scrollIntoView({ 
-                        behavior: 'smooth', // Animación de bajada suave (tipo cine)
-                        block: 'start'      // Alinea al principio del contenedor
+                        behavior: 'smooth', 
+                        block: 'start'
                     });
                 }
-            }, 100);
+            }, 300); // <--- CAMBIO AQUÍ
         }
     });
 });
