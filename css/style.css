@@ -401,14 +401,14 @@ body {
 
     .header-container {
         flex-direction: column;
-        gap: 25px;
+        gap: 10px;
     }
 
     /* 2. Logo Ajustado */
     .logo-wrapper {
         position: static;
         top: 0;
-        margin-bottom: 5px;
+        margin-bottom: 10px;
     }
 
     .hero-logo {
@@ -449,6 +449,7 @@ body {
         padding-top: 10px;
     }
 }
+
 
 
 
