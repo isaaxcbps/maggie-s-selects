@@ -357,4 +357,26 @@ body {
     visibility: hidden !important;
     pointer-events: none !important; /* Para que no bloquee los clics después de ocultarse */
     transition: 0.8s ease;
+
+}
+/* Corrección de cierre para GitHub Pages */
+.hidden-splash {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    transition: opacity 0.8s ease, visibility 0.8s !important;
+}
+
+/* Mejora para las tarjetas de productos en el grid */
+.product-card {
+    background: #fff;
+    border: 1px solid #eee;
+    padding: 20px;
+    text-align: center;
+    transition: 0.4s;
+}
+
+.product-card:hover {
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    transform: translateY(-5px);
 }
