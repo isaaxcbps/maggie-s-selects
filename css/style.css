@@ -401,7 +401,7 @@ body {
 
     .header-container {
         flex-direction: column;
-        gap: 15px;
+        gap: 25px;
     }
 
     /* 2. Logo Ajustado */
@@ -449,5 +449,6 @@ body {
         padding-top: 10px;
     }
 }
+
 
 
