@@ -36,15 +36,6 @@
         "imagen": "img/carteras/4.jpeg"
     },
     {
-        "id": 5,
-        "categoria": "carteras",
-        "nombre": "Bolso CH Carolina Herrera Beige Monogram Handbag",
-        "marca": "Carolina Herrera",
-        "precio": 95.00,
-        "stock": 1,
-        "imagen": "img/carteras/5.jpeg"
-    },
-    {
         "id": 6,
         "categoria": "carteras",
         "nombre": "Bolso Coach Monogram Brown Crossbody",
@@ -108,4 +99,5 @@
         "imagen": "img/carteras/12.jpeg"
     }
 ]
+
 
