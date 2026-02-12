@@ -18,15 +18,6 @@
         "imagen": "img/carteras/2.jpeg"
     },
     {
-        "id": 3,
-        "categoria": "carteras",
-        "nombre": "Bolso Coach Monogram Blue Crossbody",
-        "marca": "Coach",
-        "precio": 65.00,
-        "stock": 2,
-        "imagen": "img/carteras/3.jpeg"
-    },
-    {
         "id": 4,
         "categoria": "carteras",
         "nombre": "Bolso CH Carolina Herrera Brown Monogram Crossbody",
@@ -81,6 +72,7 @@
         "imagen": "img/carteras/12.jpeg"
     }
 ]
+
 
 
 
