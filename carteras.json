@@ -45,15 +45,6 @@
         "imagen": "img/carteras/6.jpeg"
     },
     {
-        "id": 7,
-        "categoria": "carteras",
-        "nombre": "Bolso CH Carolina Herrera Embossed Black Tote",
-        "marca": "Carolina Herrera",
-        "precio": 115.00,
-        "stock": 3,
-        "imagen": "img/carteras/7.jpeg"
-    },
-    {
         "id": 8,
         "categoria": "carteras",
         "nombre": "Bolso CH Carolina Herrera Monogram Brown Tote",
@@ -70,15 +61,6 @@
         "precio": 115.00,
         "stock": 6,
         "imagen": "img/carteras/9.jpeg"
-    },
-    {
-        "id": 10,
-        "categoria": "carteras",
-        "nombre": "Bolso CH Carolina Herrera Cream Monogram Handbag",
-        "marca": "Carolina Herrera",
-        "precio": 110.00,
-        "stock": 2,
-        "imagen": "img/carteras/10.jpeg"
     },
     {
         "id": 11,
@@ -99,5 +81,6 @@
         "imagen": "img/carteras/12.jpeg"
     }
 ]
+
 
 
