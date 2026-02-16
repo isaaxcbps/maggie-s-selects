@@ -13,19 +13,21 @@
         "categoria": "carteras",
         "nombre": "Bolso CH Carolina Herrera Monogram Black Tote",
         "marca": "Carolina Herrera",
-        "precio": 115.00,
-        "stock": 4,
+        "precio": 110.00,
+        "stock": 1,
         "imagen": "img/carteras/2.jpeg"
     },
+   
     {
         "id": 4,
         "categoria": "carteras",
         "nombre": "Bolso CH Carolina Herrera Brown Monogram Crossbody",
         "marca": "Carolina Herrera",
         "precio": 90.00,
-        "stock": 3,
+        "stock": 2,
         "imagen": "img/carteras/4.jpeg"
     },
+   
     {
         "id": 6,
         "categoria": "carteras",
@@ -35,6 +37,15 @@
         "stock": 1,
         "imagen": "img/carteras/6.jpeg"
     },
+    {
+        "id": 7,
+        "categoria": "carteras",
+        "nombre": "Bolso CH Carolina Herrera Embossed Black Tote",
+        "marca": "Carolina Herrera",
+        "precio": 115.00,
+        "stock": 3,
+        "imagen": "img/carteras/7.jpeg"
+    },
     
     {
         "id": 9,
@@ -42,22 +53,26 @@
         "nombre": "Bolso CH Carolina Herrera Beige Monogram Tote",
         "marca": "Carolina Herrera",
         "precio": 115.00,
-        "stock": 6,
+        "stock": 1,
         "imagen": "img/carteras/9.jpeg"
     },
-    
+    {
+        "id": 10,
+        "categoria": "carteras",
+        "nombre": "Bolso CH Carolina Herrera Cream Monogram Handbag",
+        "marca": "Carolina Herrera",
+        "precio": 110.00,
+        "stock": 2,
+        "imagen": "img/carteras/10.jpeg"
+    },
+   
     {
         "id": 12,
         "categoria": "carteras",
-        "nombre": "Bolso Coach Signature Black Tote",
-        "marca": "Coach",
+        "nombre": "Bolso CH Carolina Herrera  BLACK Monogram Tote",
+        "marca": "Carolina Herrera",
         "precio": 110.00,
-        "stock": 1,
+        "stock": 2,
         "imagen": "img/carteras/12.jpeg"
     }
 ]
-
-
-
-
-
