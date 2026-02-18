@@ -1,0 +1,12 @@
+# Instrucciones para Maggie's Selects
+User-agent: *
+Allow: /
+
+# No indexar archivos de configuración técnica
+Disallow: /css/
+Disallow: /js/
+Disallow: /carteras.json
+Disallow: /perfumes.json
+
+# Indicar la ubicación del mapa del sitio
+Sitemap: https://maggiesselects.store/sitemap.xml
