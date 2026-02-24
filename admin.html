@@ -3,231 +3,140 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel de Administración | Maggie's Selects</title>
+    <title>Control de Inventario | Maggie's Selects</title>
     <style>
-        :root {
-            --primary-color: #1a1a1a;
-            --accent-color: #d4af37; /* Dorado para toque de lujo */
-            --bg-color: #f4f4f4;
-            --text-color: #333;
-        }
-
-        body {
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .admin-card {
-            background: white;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            width: 100%;
-            max-width: 500px;
-            border-top: 5px solid var(--accent-color);
-        }
-
-        h2 {
-            text-align: center;
-            margin-top: 0;
-            font-weight: 300;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-
-        input, select {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            box-sizing: border-box;
-            font-size: 1rem;
-            transition: border-color 0.3s;
-        }
-
-        input:focus, select:focus {
-            border-color: var(--accent-color);
-            outline: none;
-        }
-
-        .row {
-            display: flex;
-            gap: 20px;
-        }
-
-        .row .form-group {
-            flex: 1;
-        }
-
-        .btn-submit {
-            width: 100%;
-            padding: 15px;
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-            margin-top: 10px;
-        }
-
-        .btn-submit:hover {
-            background-color: #333;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-
-        #mensaje-estado {
-            margin-top: 20px;
-            padding: 12px;
-            border-radius: 8px;
-            text-align: center;
-            font-size: 0.9rem;
-            display: none; /* Se activa con JS */
-        }
-
-        .info-foto {
-            display: block;
-            margin-top: 5px;
-            font-size: 0.75rem;
-            color: #777;
-        }
+        :root { --primary: #1a1a1a; --accent: #d4af37; --bg: #f4f4f4; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); padding: 20px; }
+        .container { max-width: 900px; margin: auto; }
+        .card { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin-bottom: 30px; }
+        h2 { text-transform: uppercase; letter-spacing: 1px; text-align: center; border-bottom: 2px solid var(--accent); padding-bottom: 10px; }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        input, select, button { width: 100%; padding: 12px; margin-top: 5px; border-radius: 6px; border: 1px solid #ddd; box-sizing: border-box; }
+        .full-width { grid-column: span 2; }
+        .btn-add { background: var(--primary); color: white; font-weight: bold; cursor: pointer; border: none; }
+        .btn-add:hover { background: #333; }
+        
+        /* Tabla de Inventario */
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; background: white; border-radius: 8px; overflow: hidden; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #eee; font-size: 0.9rem; }
+        th { background: #f8f8f8; }
+        .btn-edit { background: #2196F3; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px; margin-right: 5px; }
+        .btn-delete { background: #f44336; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px; }
+        img { width: 40px; border-radius: 4px; }
     </style>
 </head>
 <body>
 
-    <div class="admin-card">
-        <h2>Gestión de Inventario</h2>
-        <p style="text-align: center; color: #666; font-size: 0.85rem; margin-bottom: 30px;">
-            Complete los campos para subir un nuevo producto a <strong>Maggie's Selects</strong>.
-        </p>
-
-        <form id="form-nuevo-producto">
-            <div class="form-group">
-                <label>Nombre del Artículo:</label>
-                <input type="text" id="nombre" required placeholder="Ej: Bolso Miu Miu Black">
-            </div>
-
-            <div class="form-group">
-                <label>Marca:</label>
-                <input type="text" id="marca" required placeholder="Ej: Miu Miu">
-            </div>
-
-            <div class="form-group">
-                <label>Categoría:</label>
-                <select id="categoria" required>
-                    <option value="carteras">Carteras y Bolsos</option>
-                    <option value="perfumes">Perfumes</option>
-                </select>
-            </div>
-
-            <div class="row">
-                <div class="form-group">
-                    <label>Precio ($):</label>
-                    <input type="number" id="precio" step="0.01" min="0" required placeholder="0.00">
+<div class="container">
+    <div class="card">
+        <h2 id="titulo-form">Agregar Nuevo Producto</h2>
+        <form id="prod-form">
+            <input type="hidden" id="prod-id">
+            <div class="form-grid">
+                <div class="form-group full-width"><label>Nombre</label><input type="text" id="nombre" required></div>
+                <div class="form-group"><label>Marca</label><input type="text" id="marca" required></div>
+                <div class="form-group"><label>Categoría</label>
+                    <select id="categoria"><option value="carteras">Carteras</option><option value="perfumes">Perfumes</option></select>
                 </div>
-                <div class="form-group">
-                    <label>Stock:</label>
-                    <input type="number" id="stock" min="1" required placeholder="1">
-                </div>
+                <div class="form-group"><label>Precio ($)</label><input type="number" id="precio" step="0.01" required></div>
+                <div class="form-group"><label>Stock</label><input type="number" id="stock" required></div>
+                <div class="form-group full-width" id="foto-container"><label>Foto</label><input type="file" id="fotoInput" accept="image/*"></div>
             </div>
-
-            <div class="form-group">
-                <label>Fotografía del Producto:</label>
-                <input type="file" id="fotoInput" accept="image/*" required>
-                <span class="info-foto">La imagen se guardará automáticamente en el servidor de la tienda.</span>
-            </div>
-
-            <button type="submit" class="btn-submit" id="btnGuardar">Guardar Producto</button>
-            
-            <div id="mensaje-estado"></div>
+            <button type="submit" class="btn-add" id="btn-main">Guardar Producto</button>
+            <button type="button" id="btn-cancelar" style="display:none; background:#ccc; margin-top:10px; border:none; cursor:pointer;">Cancelar Edición</button>
         </form>
     </div>
 
-    <script>
-        const form = document.getElementById('form-nuevo-producto');
-        const mensaje = document.getElementById('mensaje-estado');
-        const btn = document.getElementById('btnGuardar');
+    <div class="card">
+        <h2>Inventario Actual</h2>
+        <table id="tabla-productos">
+            <thead><tr><th>Foto</th><th>Producto</th><th>Precio</th><th>Stock</th><th>Acciones</th></tr></thead>
+            <tbody id="lista-items"></tbody>
+        </table>
+    </div>
+</div>
 
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            // Estética de carga
-            btn.disabled = true;
-            btn.innerText = "PROCESANDO...";
-            mensaje.style.display = "block";
-            mensaje.style.backgroundColor = "#e1f5fe";
-            mensaje.style.color = "#0277bd";
-            mensaje.innerText = "⏳ Subiendo imagen a GitHub y actualizando catálogo...";
+<script>
+    const API_URL = 'https://api-maggies.nauc8778.workers.dev';
+    let editMode = false;
 
+    // --- CARGAR PRODUCTOS (READ) ---
+    async function cargarTabla() {
+        const res = await fetch(API_URL);
+        const data = await res.json();
+        const body = document.getElementById('lista-items');
+        body.innerHTML = '';
+        data.forEach(p => {
+            body.innerHTML += `
+                <tr>
+                    <td><img src="${p.imagen}"></td>
+                    <td><strong>${p.marca}</strong><br>${p.nombre}</td>
+                    <td>$${p.precio.toFixed(2)}</td>
+                    <td>${p.stock}</td>
+                    <td>
+                        <button class="btn-edit" onclick="prepararEdicion(${p.id}, '${p.nombre}', '${p.marca}', ${p.precio}, ${p.stock})">✎</button>
+                        <button class="btn-delete" onclick="eliminarProducto(${p.id})">🗑</button>
+                    </td>
+                </tr>`;
+        });
+    }
+
+    // --- ELIMINAR (DELETE) ---
+    async function eliminarProducto(id) {
+        if (!confirm("¿Seguro que deseas eliminar este producto?")) return;
+        await fetch(API_URL, { method: 'DELETE', body: JSON.stringify({ id }) });
+        cargarTabla();
+    }
+
+    // --- PREPARAR EDICIÓN (UPDATE) ---
+    function prepararEdicion(id, nombre, marca, precio, stock) {
+        editMode = true;
+        document.getElementById('prod-id').value = id;
+        document.getElementById('nombre').value = nombre;
+        document.getElementById('marca').value = marca;
+        document.getElementById('precio').value = precio;
+        document.getElementById('stock').value = stock;
+        document.getElementById('foto-container').style.display = 'none'; // No editamos foto por ahora
+        document.getElementById('btn-main').innerText = "Actualizar Datos";
+        document.getElementById('btn-cancelar').style.display = 'block';
+        document.getElementById('titulo-form').innerText = "Editando Producto";
+    }
+
+    document.getElementById('btn-cancelar').onclick = () => location.reload();
+
+    // --- GUARDAR O ACTUALIZAR (CREATE / UPDATE) ---
+    document.getElementById('prod-form').onsubmit = async (e) => {
+        e.preventDefault();
+        const id = document.getElementById('prod-id').value;
+        const datos = {
+            nombre: document.getElementById('nombre').value,
+            marca: document.getElementById('marca').value,
+            precio: parseFloat(document.getElementById('precio').value),
+            stock: parseInt(document.getElementById('stock').value)
+        };
+
+        if (editMode) {
+            await fetch(API_URL, { method: 'PUT', body: JSON.stringify({ id, ...datos }) });
+        } else {
             const file = document.getElementById('fotoInput').files[0];
-            
-            // 1. Convertir imagen a Base64
             const reader = new FileReader();
             reader.readAsDataURL(file);
             reader.onload = async () => {
-                const base64Content = reader.result.split(',')[1];
-
-                const datos = {
-                    nombre: document.getElementById('nombre').value,
-                    marca: document.getElementById('marca').value,
+                const fullData = { 
+                    ...datos, 
                     categoria: document.getElementById('categoria').value,
-                    precio: parseFloat(document.getElementById('precio').value),
-                    stock: parseInt(document.getElementById('stock').value),
-                    imagenNombre: file.name.replace(/\s+/g, '-').toLowerCase(), // Limpiamos el nombre del archivo
-                    imagenBase64: base64Content
+                    imagenNombre: file.name.replace(/\s+/g, '-').toLowerCase(),
+                    imagenBase64: reader.result.split(',')[1]
                 };
-
-                try {
-                    // 2. Enviar al Worker (Back-End)
-                    const response = await fetch('https://api-maggies.nauc8778.workers.dev', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(datos)
-                    });
-
-                    const result = await response.json();
-
-                    if (response.ok && result.success) {
-                        mensaje.style.backgroundColor = "#e8f5e9";
-                        mensaje.style.color = "#2e7d32";
-                        mensaje.innerText = "✅ ¡Éxito! El producto ya está visible en la tienda.";
-                        form.reset();
-                    } else {
-                        throw new Error(result.error || "Error en el servidor");
-                    }
-                } catch (err) {
-                    mensaje.style.backgroundColor = "#ffebee";
-                    mensaje.style.color = "#c62828";
-                    mensaje.innerText = "❌ Error: " + err.message;
-                } finally {
-                    btn.disabled = false;
-                    btn.innerText = "GUARDAR PRODUCTO";
-                }
+                await fetch(API_URL, { method: 'POST', body: JSON.stringify(fullData) });
+                location.reload();
             };
-        });
-    </script>
+            return;
+        }
+        location.reload();
+    };
+
+    cargarTabla();
+</script>
 </body>
 </html>
