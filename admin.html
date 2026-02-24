@@ -5,81 +5,129 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel de Administración | Maggie's Selects</title>
     <style>
+        :root {
+            --primary-color: #1a1a1a;
+            --accent-color: #d4af37; /* Dorado para toque de lujo */
+            --bg-color: #f4f4f4;
+            --text-color: #333;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f8f9fa;
-            color: #333;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
             display: flex;
             justify-content: center;
-            padding: 40px 20px;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
         }
+
         .admin-card {
             background: white;
-            padding: 30px 40px;
-            border-radius: 12px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
             width: 100%;
             max-width: 500px;
+            border-top: 5px solid var(--accent-color);
         }
+
         h2 {
             text-align: center;
-            color: #1a1a1a;
+            margin-top: 0;
+            font-weight: 300;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .form-group {
             margin-bottom: 20px;
         }
-        .form-group {
-            margin-bottom: 15px;
-        }
+
         label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
             font-weight: 600;
-            font-size: 14px;
+            font-size: 0.9rem;
         }
+
         input, select {
             width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
             box-sizing: border-box;
-            font-size: 15px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
         }
+
         input:focus, select:focus {
-            border-color: #333;
+            border-color: var(--accent-color);
             outline: none;
         }
+
+        .row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .row .form-group {
+            flex: 1;
+        }
+
         .btn-submit {
             width: 100%;
-            padding: 12px;
-            background-color: #1a1a1a;
+            padding: 15px;
+            background-color: var(--primary-color);
             color: white;
             border: none;
-            border-radius: 6px;
-            font-size: 16px;
+            border-radius: 8px;
+            font-size: 1rem;
             font-weight: bold;
             cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
             margin-top: 10px;
-            transition: background 0.3s;
         }
+
         .btn-submit:hover {
-            background-color: #444;
+            background-color: #333;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
+
         #mensaje-estado {
-            margin-top: 15px;
+            margin-top: 20px;
+            padding: 12px;
+            border-radius: 8px;
             text-align: center;
-            font-weight: bold;
-            font-size: 14px;
+            font-size: 0.9rem;
+            display: none; /* Se activa con JS */
+        }
+
+        .info-foto {
+            display: block;
+            margin-top: 5px;
+            font-size: 0.75rem;
+            color: #777;
         }
     </style>
 </head>
 <body>
 
     <div class="admin-card">
-        <h2>📦 Ingreso de Nueva Mercadería</h2>
+        <h2>Gestión de Inventario</h2>
+        <p style="text-align: center; color: #666; font-size: 0.85rem; margin-bottom: 30px;">
+            Complete los campos para subir un nuevo producto a <strong>Maggie's Selects</strong>.
+        </p>
+
         <form id="form-nuevo-producto">
-            
             <div class="form-group">
-                <label>Nombre del Producto:</label>
-                <input type="text" id="nombre" required placeholder="Ej: Bolso Wander Matelassé">
+                <label>Nombre del Artículo:</label>
+                <input type="text" id="nombre" required placeholder="Ej: Bolso Miu Miu Black">
             </div>
 
             <div class="form-group">
@@ -95,27 +143,91 @@
                 </select>
             </div>
 
-            <div style="display: flex; gap: 15px;">
-                <div class="form-group" style="flex: 1;">
+            <div class="row">
+                <div class="form-group">
                     <label>Precio ($):</label>
-                    <input type="number" id="precio" step="0.01" min="0" required placeholder="Ej: 420.00">
+                    <input type="number" id="precio" step="0.01" min="0" required placeholder="0.00">
                 </div>
-                <div class="form-group" style="flex: 1;">
-                    <label>Stock Inicial:</label>
-                    <input type="number" id="stock" min="1" required placeholder="Ej: 2">
+                <div class="form-group">
+                    <label>Stock:</label>
+                    <input type="number" id="stock" min="1" required placeholder="1">
                 </div>
             </div>
 
             <div class="form-group">
-                <label>Nombre de la Foto (con extensión):</label>
-                <input type="text" id="imagen" required placeholder="Ej: nueva-cartera.jpeg">
-                <small style="color: #666; font-size: 12px;">La foto debe estar subida en la carpeta de GitHub.</small>
+                <label>Fotografía del Producto:</label>
+                <input type="file" id="fotoInput" accept="image/*" required>
+                <span class="info-foto">La imagen se guardará automáticamente en el servidor de la tienda.</span>
             </div>
 
-            <button type="submit" class="btn-submit">Guardar en Base de Datos</button>
+            <button type="submit" class="btn-submit" id="btnGuardar">Guardar Producto</button>
+            
             <div id="mensaje-estado"></div>
         </form>
     </div>
 
+    <script>
+        const form = document.getElementById('form-nuevo-producto');
+        const mensaje = document.getElementById('mensaje-estado');
+        const btn = document.getElementById('btnGuardar');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Estética de carga
+            btn.disabled = true;
+            btn.innerText = "PROCESANDO...";
+            mensaje.style.display = "block";
+            mensaje.style.backgroundColor = "#e1f5fe";
+            mensaje.style.color = "#0277bd";
+            mensaje.innerText = "⏳ Subiendo imagen a GitHub y actualizando catálogo...";
+
+            const file = document.getElementById('fotoInput').files[0];
+            
+            // 1. Convertir imagen a Base64
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = async () => {
+                const base64Content = reader.result.split(',')[1];
+
+                const datos = {
+                    nombre: document.getElementById('nombre').value,
+                    marca: document.getElementById('marca').value,
+                    categoria: document.getElementById('categoria').value,
+                    precio: parseFloat(document.getElementById('precio').value),
+                    stock: parseInt(document.getElementById('stock').value),
+                    imagenNombre: file.name.replace(/\s+/g, '-').toLowerCase(), // Limpiamos el nombre del archivo
+                    imagenBase64: base64Content
+                };
+
+                try {
+                    // 2. Enviar al Worker (Back-End)
+                    const response = await fetch('https://api-maggies.nauc8778.workers.dev', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(datos)
+                    });
+
+                    const result = await response.json();
+
+                    if (response.ok && result.success) {
+                        mensaje.style.backgroundColor = "#e8f5e9";
+                        mensaje.style.color = "#2e7d32";
+                        mensaje.innerText = "✅ ¡Éxito! El producto ya está visible en la tienda.";
+                        form.reset();
+                    } else {
+                        throw new Error(result.error || "Error en el servidor");
+                    }
+                } catch (err) {
+                    mensaje.style.backgroundColor = "#ffebee";
+                    mensaje.style.color = "#c62828";
+                    mensaje.innerText = "❌ Error: " + err.message;
+                } finally {
+                    btn.disabled = false;
+                    btn.innerText = "GUARDAR PRODUCTO";
+                }
+            };
+        });
+    </script>
 </body>
 </html>
