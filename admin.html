@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración | Maggie's Selects</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+        .admin-card {
+            background: white;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+        h2 {
+            text-align: center;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 15px;
+        }
+        input:focus, select:focus {
+            border-color: #333;
+            outline: none;
+        }
+        .btn-submit {
+            width: 100%;
+            padding: 12px;
+            background-color: #1a1a1a;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+        .btn-submit:hover {
+            background-color: #444;
+        }
+        #mensaje-estado {
+            margin-top: 15px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="admin-card">
+        <h2>📦 Ingreso de Nueva Mercadería</h2>
+        <form id="form-nuevo-producto">
+            
+            <div class="form-group">
+                <label>Nombre del Producto:</label>
+                <input type="text" id="nombre" required placeholder="Ej: Bolso Wander Matelassé">
+            </div>
+
+            <div class="form-group">
+                <label>Marca:</label>
+                <input type="text" id="marca" required placeholder="Ej: Miu Miu">
+            </div>
+
+            <div class="form-group">
+                <label>Categoría:</label>
+                <select id="categoria" required>
+                    <option value="carteras">Carteras y Bolsos</option>
+                    <option value="perfumes">Perfumes</option>
+                </select>
+            </div>
+
+            <div style="display: flex; gap: 15px;">
+                <div class="form-group" style="flex: 1;">
+                    <label>Precio ($):</label>
+                    <input type="number" id="precio" step="0.01" min="0" required placeholder="Ej: 420.00">
+                </div>
+                <div class="form-group" style="flex: 1;">
+                    <label>Stock Inicial:</label>
+                    <input type="number" id="stock" min="1" required placeholder="Ej: 2">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Nombre de la Foto (con extensión):</label>
+                <input type="text" id="imagen" required placeholder="Ej: nueva-cartera.jpeg">
+                <small style="color: #666; font-size: 12px;">La foto debe estar subida en la carpeta de GitHub.</small>
+            </div>
+
+            <button type="submit" class="btn-submit">Guardar en Base de Datos</button>
+            <div id="mensaje-estado"></div>
+        </form>
+    </div>
+
+</body>
+</html>
