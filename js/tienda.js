@@ -1,78 +1,54 @@
-document.addEventListener('DOMContentLoaded', () => {
-    console.log("Iniciando sistema de Maggie's Selects...");
-    
-    // 1. Cargamos carteras y perfumes por defecto al inicio
-    const fuentesIniciales = ['carteras.json', 'perfumes.json'];
-    cargarCategoria(fuentesIniciales);
+/* =========================================
+   SISTEMA PRINCIPAL: MAGGIE'S SELECTS
+   Powered by: NIU SYSTEMS & Cloudflare D1
+   ========================================= */
 
-    // 2. Activamos la escucha de clics en el menú
-    configurarMenu();
+// Variable global para almacenar el catálogo en memoria (más rápido)
+let catalogoGlobal = [];
+const API_URL = 'https://api-maggies.nauc8778.workers.dev';
+
+document.addEventListener('DOMContentLoaded', () => {
+    console.log("Iniciando sistema dinámico de Maggie's Selects...");
+    
+    // 1. Cargamos TODOS los productos desde la API al inicio
+    cargarDesdeAPI();
 });
 
 /**
- * Función para cargar productos desde archivos JSON
+ * Función Principal: Conecta con la base de datos Cloudflare D1
  */
-async function cargarCategoria(archivos) {
-    const contenedor = document.getElementById('contenedor-productos');
+async function cargarDesdeAPI() {
     const splash = document.getElementById('splash-screen');
-    const listaArchivos = Array.isArray(archivos) ? archivos : [archivos];
-
-    // Seguridad: Si la carga falla o se bloquea localmente, el Splash se quita tras 2.5 segundos
     const fallbackSplash = setTimeout(() => {
         if (splash && !splash.classList.contains('hidden-splash')) {
-            console.warn("Forzando cierre de Splash Screen por tiempo de espera.");
             splash.classList.add('hidden-splash');
         }
     }, 2500);
 
     try {
-        console.log("Cargando archivos:", listaArchivos);
+        console.log("Conectando con la base de datos...");
         
-        // Peticiones asíncronas en paralelo para optimizar velocidad
-        const promesas = listaArchivos.map(archivo => 
-            fetch(archivo).then(res => {
-                if (!res.ok) throw new Error(`No se pudo leer el archivo: ${archivo}`);
-                return res.json();
-            })
-        );
+        // Petición asíncrona a tu API
+        const respuesta = await fetch(API_URL);
+        if (!respuesta.ok) throw new Error("Fallo en la conexión con el servidor.");
         
-        const resultados = await Promise.all(promesas);
-        const productos = resultados.flat(); // Unificamos carteras y perfumes
+        // Guardamos todo en la variable global
+        catalogoGlobal = await respuesta.json();
+        console.log(`Catálogo cargado: ${catalogoGlobal.length} productos.`);
         
-        if (contenedor) {
-            contenedor.innerHTML = ''; // Limpiamos el mensaje de "Cargando..."
+        // Pintamos todos los productos (Inicio)
+        renderizarProductos(catalogoGlobal);
+        
+        // Una vez cargados los datos, activamos los botones del menú
+        configurarMenu();
 
-            if (productos.length === 0) {
-                contenedor.innerHTML = '<p class="loading">Próximamente: Nuevos ingresos exclusivos.</p>';
-            } else {
-                productos.forEach(p => {
-                    const card = document.createElement('div');
-                    card.className = 'product-card';
-                    card.innerHTML = `
-                        <div class="product-img-container">
-                            <img src="${p.imagen}" alt="${p.nombre}">
-                        </div>
-                        <div class="product-info">
-                            <span class="marca-tag">${p.marca}</span>
-                            <h3>${p.nombre}</h3>
-                            <p class="precio">$${p.precio.toFixed(2)}</p>
-                            <p class="stock">Disponibles: <span id="stock-${p.id}">${p.stock}</span></p>
-                            <button class="btn-buy" onclick="procesarCompra(${p.id}, '${p.nombre}', ${p.precio}, '${p.marca}')">
-                                Comprar ahora
-                            </button>
-                        </div>
-                    `;
-                    contenedor.appendChild(card);
-                });
-            }
-        }
     } catch (error) {
-        console.error("Error crítico en la carga de datos:", error);
+        console.error("Error crítico conectando a la API:", error);
+        const contenedor = document.getElementById('contenedor-productos');
         if (contenedor) {
-            contenedor.innerHTML = '<p class="loading">Error al cargar el catálogo. Asegúrate de usar Live Server o subirlo a GitHub.</p>';
+            contenedor.innerHTML = '<p class="loading">Error al cargar el catálogo. Por favor, recarga la página.</p>';
         }
     } finally {
-        // Limpiamos el temporizador y ocultamos el Splash elegantemente
         clearTimeout(fallbackSplash);
         setTimeout(() => {
             if (splash) splash.classList.add('hidden-splash');
@@ -81,39 +57,87 @@ async function cargarCategoria(archivos) {
 }
 
 /**
- * Configura los filtros del menú de navegación
+ * Función para pintar las tarjetas en el HTML
  */
-function configurarMenu() {
-    const links = {
-        'nav-inicio': ['carteras.json', 'perfumes.json'],
-        'nav-carteras': 'carteras.json',
-        'nav-perfumes': 'perfumes.json'
-    };
+function renderizarProductos(productosFiltrados) {
+    const contenedor = document.getElementById('contenedor-productos');
+    if (!contenedor) return;
 
-    Object.keys(links).forEach(id => {
-        const elemento = document.getElementById(id);
-        if (elemento) {
-            elemento.addEventListener('click', (e) => {
-                e.preventDefault();
-                console.log(`Filtrando por: ${id}`);
-                cargarCategoria(links[id]);
-            });
-        }
+    contenedor.innerHTML = ''; // Limpiamos el contenedor
+
+    if (productosFiltrados.length === 0) {
+        contenedor.innerHTML = '<p class="loading">Próximamente: Nuevos ingresos exclusivos.</p>';
+        return;
+    }
+
+    productosFiltrados.forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        card.innerHTML = `
+            <div class="product-img-container">
+                <img src="${p.imagen}" alt="${p.nombre}">
+            </div>
+            <div class="product-info">
+                <span class="marca-tag">${p.marca}</span>
+                <h3>${p.nombre}</h3>
+                <p class="precio">$${p.precio.toFixed(2)}</p>
+                <p class="stock">Disponibles: <span id="stock-${p.id}">${p.stock}</span></p>
+                <button class="btn-buy" onclick="procesarCompra(${p.id}, '${p.nombre}', ${p.precio}, '${p.marca}')">
+                    Comprar ahora
+                </button>
+            </div>
+        `;
+        contenedor.appendChild(card);
     });
 }
 
 /**
- * Lógica de compra y redirección a WhatsApp de Maggie's Selects
+ * Configura los filtros del menú (Filtrado en Memoria)
+ */
+function configurarMenu() {
+    const btnInicio = document.getElementById('nav-inicio');
+    const btnCarteras = document.getElementById('nav-carteras');
+    const btnPerfumes = document.getElementById('nav-perfumes');
+
+    if (btnInicio) {
+        btnInicio.addEventListener('click', (e) => {
+            e.preventDefault();
+            renderizarProductos(catalogoGlobal); // Muestra todo
+        });
+    }
+
+    if (btnCarteras) {
+        btnCarteras.addEventListener('click', (e) => {
+            e.preventDefault();
+            // Filtramos el array global buscando solo la categoría 'carteras'
+            const soloCarteras = catalogoGlobal.filter(p => p.categoria === 'carteras');
+            renderizarProductos(soloCarteras);
+        });
+    }
+
+    if (btnPerfumes) {
+        btnPerfumes.addEventListener('click', (e) => {
+            e.preventDefault();
+            // Filtramos el array global buscando solo la categoría 'perfumes'
+            const soloPerfumes = catalogoGlobal.filter(p => p.categoria === 'perfumes');
+            renderizarProductos(soloPerfumes);
+        });
+    }
+}
+
+/**
+ * Lógica de compra y redirección a WhatsApp
  */
 function procesarCompra(id, nombre, precio, marca) {
     const stockElement = document.getElementById(`stock-${id}`);
     let stockActual = parseInt(stockElement.innerText);
 
     if (stockActual > 0) {
+        // En una app real, aquí enviarías un PUT a la API para restar stock.
+        // Por ahora, simulamos visualmente:
         stockActual--;
         stockElement.innerText = stockActual;
 
-        // Reemplaza con el número de WhatsApp de tu mamá (formato internacional)
         const telefono = "593981724457"; 
         const mensaje = encodeURIComponent(
             `¡Hola Maggie's Selects! 👋\nMe interesa este artículo de lujo:\n\n` +
@@ -125,7 +149,6 @@ function procesarCompra(id, nombre, precio, marca) {
         
         const urlWhatsapp = `https://wa.me/${telefono}?text=${mensaje}`;
 
-        // Abrir en pestaña nueva
         setTimeout(() => {
             window.open(urlWhatsapp, '_blank');
         }, 300);
@@ -134,28 +157,25 @@ function procesarCompra(id, nombre, precio, marca) {
     }
 }
 
-/* =========================================
-   FUNCIONALIDAD DE MÉTODOS DE PAGO
-
-   ========================================= */
+/**
+ * Métodos de Pago
+ */
 function infoPago(metodo) {
-    // Usamos un 'alert' sencillo, pero con texto profesional
     alert(
         `💳 Pago con ${metodo}:\n\n` +
         `Para tu seguridad, procesamos los pagos con ${metodo} mediante enlace de pago seguro (PayPhone / Deuna) o transferencia bancaria directa.\n\n` +
         `¡Contáctanos por WhatsApp para enviarte el link!`
     );
 }
-/* =========================================
-   AUTO-SCROLL MEJORADO (Versión Móvil)
-   ========================================= */
+
+/**
+ * Auto-Scroll Mejorado
+ */
 document.querySelectorAll('.nav-links a').forEach(enlace => {
     enlace.addEventListener('click', function(e) {
         const destino = this.getAttribute('href');
 
         if (destino.includes('#') && destino !== 'index.html') {
-            
-            // AUMENTAMOS A 300ms (Para dar tiempo a los celulares lentos)
             setTimeout(() => {
                 const seccionProductos = document.getElementById('contenedor-productos');
                 if (seccionProductos) {
@@ -164,7 +184,7 @@ document.querySelectorAll('.nav-links a').forEach(enlace => {
                         block: 'start'
                     });
                 }
-            }, 300); // <--- CAMBIO AQUÍ
+            }, 300);
         }
     });
 });
